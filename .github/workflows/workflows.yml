@@ -1,15 +1,11 @@
-name: Terraform
+name: Terraform Destroy
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # This allows you to manually trigger the workflow
 
 jobs:
   destroy:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'  # Only allow manual trigger for destruction
 
     steps:
       - name: Checkout code

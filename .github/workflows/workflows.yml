@@ -34,8 +34,6 @@ jobs:
         if: github.ref == 'refs/heads/main'  # Only apply on the main branch
         run: terraform apply -auto-approve tfplan
 
-      - name: Upload Terraform Plan
-        uses: actions/upload-artifact@v3  # Use the latest version
-        with:
-          name: terraform-plan
-          path: tfplan
+      - name: Terraform Destroy
+        run: terraform distroy -auto-approve tfplan
+

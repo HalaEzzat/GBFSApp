@@ -22,9 +22,11 @@ module.exports.fetchStats = async () => {
       const statusData = statusResponse.data;
 
       let vehicleCount = 0;
-      if (statusData.data.stations) {
+
+      // Ensure the data structure contains stations
+      if (statusData.data && statusData.data.stations) {
         vehicleCount = statusData.data.stations.reduce((sum, station) => sum + station.num_bikes_available, 0);
-      } else if (statusData.data.bikes) {
+      } else if (statusData.data && statusData.data.bikes) {
         vehicleCount = statusData.data.bikes.length;
       }
 

@@ -134,7 +134,7 @@ resource "aws_security_group" "grafana_sg" {
 }
 
 resource "aws_instance" "grafana" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Use an appropriate Grafana AMI for your region
+  ami           = "ami-005fc0f236362e99f"  # Use an appropriate Grafana AMI for your region
   instance_type = "t2.micro"               # Ensure it's Free Tier eligible
   subnet_id     = aws_subnet.public_subnet.id
   security_groups = [aws_security_group.grafana_sg.name]

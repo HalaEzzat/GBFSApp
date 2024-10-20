@@ -197,8 +197,3 @@ output "grafana_public_ip" {
   value = aws_instance.grafana.public_ip
 }
 
-# Variables
-variable "aws_region" {
-  default = "us-east-1"
-}
-

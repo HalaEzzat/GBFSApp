@@ -192,6 +192,7 @@ resource "aws_instance" "grafana" {
 }
 
 
+
 # Output the Public IP of Grafana Instance
 output "grafana_public_ip" {
   value = aws_instance.grafana.public_ip

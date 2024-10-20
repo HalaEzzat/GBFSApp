@@ -3,21 +3,21 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "./vpc/vpc.tf"
+  source = "./vpc"
 }
 
 module "iam" {
-  source = "./iam/iam.tf"
+  source = "./iam"
 }
 
 module "dynamodb" {
-  source = "./dynamodb/dynamodb.tf"
+  source = "./dynamodb"
 }
 
 module "lambda" {
-  source = "./lambda/lambda.tf"
+  source = "./lambda"
 }
 
 module "grafana" {
-  source = "./grafana/grafana.tf"
+  source = "./grafana"
 }

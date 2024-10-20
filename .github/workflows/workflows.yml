@@ -30,10 +30,6 @@ jobs:
         id: plan
         run: terraform plan -out=tfplan
 
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'  # Only apply on the main branch
-        run: terraform apply -auto-approve tfplan
-
       - name: Terraform Destroy
         run: terraform distroy -auto-approve tfplan
 

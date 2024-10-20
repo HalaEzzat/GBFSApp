@@ -1,12 +1,8 @@
 name: Terraform
 
 on:
-  push:
-    branches:
-      - main  # Change to your default branch if it's different
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+
 
 jobs:
   terraform:

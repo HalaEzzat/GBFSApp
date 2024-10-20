@@ -4,10 +4,10 @@ resource "aws_vpc" "gbfs_vpc" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  vpc_id                    = aws_vpc.gbfs_vpc.id
-  cidr_block                = "10.0.1.0/24"
-  map_public_ip_on_launch   = true
-  availability_zone         = "us-east-1a"
+  vpc_id            = aws_vpc.gbfs_vpc.id
+  cidr_block        = "10.0.1.0/24"
+  map_public_ip_on_launch = true
+  availability_zone = "us-east-1a"
   tags = { Name = "public-subnet" }
 }
 
@@ -18,11 +18,13 @@ resource "aws_subnet" "private_subnet" {
   tags = { Name = "private-subnet" }
 }
 
+# Internet Gateway to allow outbound access from public subnet
 resource "aws_internet_gateway" "gateway" {
   vpc_id = aws_vpc.gbfs_vpc.id
   tags = { Name = "internet-gateway" }
 }
 
+# Route Table for Public Subnet
 resource "aws_route_table" "public_route" {
   vpc_id = aws_vpc.gbfs_vpc.id
 

@@ -1,12 +1,11 @@
-# IAM Role for Lambda
 resource "aws_iam_role" "lambda_role" {
   name = "gbfs-lambda-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
-      Action    = "sts:AssumeRole",
-      Effect    = "Allow",
+      Action    = "sts:AssumeRole"
+      Effect    = "Allow"
       Principal = { Service = "lambda.amazonaws.com" }
     }]
   })
@@ -47,7 +46,7 @@ resource "aws_iam_policy" "grafana_dynamodb_policy" {
         "dynamodb:Scan",
         "dynamodb:Query"
       ],
-      Resource = aws_dynamodb_table.vehicle_stats.arn  # Use the ARN of your DynamoDB table
+      Resource = "*"
     }]
   })
 }
@@ -56,4 +55,10 @@ resource "aws_iam_policy" "grafana_dynamodb_policy" {
 resource "aws_iam_role_policy_attachment" "grafana_policy_attachment" {
   role       = aws_iam_role.grafana_role.name
   policy_arn = aws_iam_policy.grafana_dynamodb_policy.arn
+}
+
+# IAM Instance Profile for Grafana
+resource "aws_iam_instance_profile" "grafana_instance_profile" {
+  name = "grafana-instance-profile"
+  role = aws_iam_role.grafana_role.name
 }

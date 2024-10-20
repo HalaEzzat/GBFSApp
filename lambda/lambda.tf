@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "fetch_stats" {
-  filename         = "lambda.zip"
+  filename         = "lambda.zip"  # Ensure this is built correctly
   function_name    = "gbfs-fetch-stats"
   role             = aws_iam_role.lambda_role.arn
   handler          = "handler.fetchStats"
@@ -15,6 +15,7 @@ resource "aws_lambda_function" "fetch_stats" {
   }
 }
 
+# CloudWatch Event to Schedule Lambda (Every 15 minutes)
 resource "aws_cloudwatch_event_rule" "schedule" {
   name                 = "gbfs-schedule"
   schedule_expression  = "rate(15 minutes)"

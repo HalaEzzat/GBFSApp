@@ -5,7 +5,7 @@ resource "aws_security_group" "grafana_sg" {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]  # Adjust as necessary for security
   }
 
   egress {
@@ -18,6 +18,7 @@ resource "aws_security_group" "grafana_sg" {
   tags = { Name = "grafana-security-group" }
 }
 
+# EC2 Instance for Grafana
 resource "aws_instance" "grafana" {
   ami           = "ami-0c55b159cbfafe1f0"  # Use an appropriate Grafana AMI for your region
   instance_type = "t2.micro"               # Ensure it's Free Tier eligible
@@ -46,7 +47,7 @@ resource "aws_instance" "grafana" {
                   type: grafana-dynamodb-datasource
                   access: proxy
                   jsonData:
-                    region: YOUR_AWS_REGION  # Replace with your AWS region
+                    region: ${var.aws_region}
               EOT
 
               # Import the dashboard
@@ -74,9 +75,4 @@ resource "aws_instance" "grafana" {
               EOF
 
   tags = { Name = "Grafana Instance" }
-}
-
-# Output the public IP of the Grafana instance
-output "grafana_public_ip" {
-  value = aws_instance.grafana.public_ip
 }

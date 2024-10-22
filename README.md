@@ -2,7 +2,7 @@
 
  This task is for : https://github.com/umob-app/hiring-assignment/blob/main/devops-engineering.md
 
- I choosed 3 providers : 
+ I choose 3 providers : 
 ``` py
 providers = [
     {"name": "Careem BIKE", "url": "https://dubai.publicbikesystem.net/customer/gbfs/v2/gbfs.json"},

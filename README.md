@@ -48,6 +48,7 @@ P.S: I only used free tier of everything as this is only a POC of what you can d
 ``` sh
 aws s3api create-bucket --bucket hala-elhamahmy --region us-east-1
 ```
+  No worries I secure it in terraform.
    make sure to change the name of the bucket in terraform files accordingly.
 - Trigger the pipeline manually via `Actions` tab in your repo.
 - Once it fully runs it will output the ec2 public ip use it as follows: `ip:3000` in your browser .

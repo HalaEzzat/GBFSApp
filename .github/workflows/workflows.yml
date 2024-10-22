@@ -56,4 +56,6 @@ jobs:
         run: terraform init
 
       - name: Terraform Destroy
+        env:
+          TF_VAR_ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}  # Pass the SSH key as an environment variable
         run: terraform destroy -auto-approve

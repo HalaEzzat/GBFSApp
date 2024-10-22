@@ -1,9 +1,11 @@
 variable "aws_region" {
-  description = "The AWS region to deploy resources."
+  description = "AWS region"
   default     = "us-east-1"
 }
 
-variable "dynamodb_table_name" {
-  description = "The name of the DynamoDB table for vehicle stats."
-  default     = "vehicle-stats"
+
+variable "ssh_key_name" {
+  description = "The name of the SSH key"
+  default     = "id_rsa"
 }
+

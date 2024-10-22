@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: gbfs_user
+      POSTGRES_PASSWORD: gbfs_password
+      POSTGRES_DB: gbfs_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    depends_on:
+      - postgres
+
+  gbfs_scraper:
+    build: ./scraper
+    depends_on:
+      - postgres
+
+volumes:
+  pg_data:

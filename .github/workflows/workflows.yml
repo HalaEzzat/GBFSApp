@@ -2,10 +2,7 @@ name: Terraform
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-
+ 
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -29,19 +26,11 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -out=tfplan
-
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'  # Only apply on main branch
-        run: terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}  # Pass the SSH key as an environment variable
+        run: terraform apply -auto-approve
 
-      - name: Upload Terraform Plan
-        uses: actions/upload-artifact@v3
-        with:
-          name: terraform-plan
-          path: tfplan
 
   destroy:
     runs-on: ubuntu-latest

@@ -9,3 +9,7 @@ variable "ssh_key_name" {
   default     = "id_rsa"
 }
 
+variable "ssh_private_key" {
+  description = "private key"
+}
+

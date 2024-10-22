@@ -30,7 +30,7 @@ resource "aws_instance" "docker_instance" {
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  key_name               = tls_private_key.id_rsa.key_name
+  key_name               = "id_rsa"
   associate_public_ip_address = true
 
   tags = { Name = "Docker Instance" }

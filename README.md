@@ -43,7 +43,7 @@ P.S: I only used free tier of everything as this is only a POC of what you can d
 
 ## Steps to run the solution:
 
-- Add AWS credentials and ssh private key [of the ec2 instance] as CI variables on github.
+- Add AWS credentials and ssh private key [of the ec2 instance] as `Secrets` on github.
 - Create the s3 bucket tht hosts your tfstate file using command :
 ``` sh
 aws s3api create-bucket --bucket hala-elhamahmy --region us-east-1

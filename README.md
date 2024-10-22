@@ -2,6 +2,32 @@
 
  This task is for : https://github.com/umob-app/hiring-assignment/blob/main/devops-engineering.md
 
+ I choosed 3 providers : 
+``` py
+providers = [
+    {"name": "Careem BIKE", "url": "https://dubai.publicbikesystem.net/customer/gbfs/v2/gbfs.json"},
+    {"name": "Bike Nordelta", "url": "https://nordelta.publicbikesystem.net/ube/gbfs/v1/"},
+    {"name": "Ecobici", "url": "https://buenosaires.publicbikesystem.net/ube/gbfs/v1/"}
+]
+```
+- you can add more .
+- The script will create the db table if it doesn't exist and only have simple data like :
+```py
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS bike_stats (
+                    id SERIAL PRIMARY KEY,
+                    provider VARCHAR(50),
+                    station_id VARCHAR(50),
+                    bike_count INT,
+                    timestamp TIMESTAMP
+                );
+                """
+            )
+```
+  You can add more data from the files, But this is just for POC.
+- The Script will search for the `station_status` url so It can monitor the available bikes and other data.
+- The script uses `Threading` so each link will be monitored in it's own thread and data is saved in postgresql db .
 ## Approach
 
 P.S: I only used free tier of everything as this is only a POC of what you can do.
@@ -50,15 +76,15 @@ aws s3api create-bucket --bucket hala-elhamahmy --region us-east-1
 ![imported dashboard](https://github.com/user-attachments/assets/7fa6021c-450e-45a9-afd5-a6cf38394817)
 - To Destroy all resources just rerun the `destroy` job manually.
 
-## Another Approach [not so free-tier]:
+## Other Approaches [not so free-tier]:
 
 - create a lambda function to parse your json file and monitore changes.
 - create dynamodb to host your data
-- create ec2 to host Grafana then add DynamoDB as a Datasource
+- create ec2 to host Grafana or you can also create it as ECS Task then add DynamoDB as a Datasource
 
 This was my first approach only to findout that to use DynamoDB as a Datasource in grafana you'll need an enterprise license .
 I even found that in Grafana you can add json as a data source then create your dashboard based on it . but I think we still need database for historical data .
-I think real life approach we will use a historical database or big data for better data analysis and metrics.
+I think real life approach we will use a historical database or big data for better data analysis and metrics and ofcourse I would create a more secured infrastructure.
 I also tried another approach : using `ELK Stack` in terraform .
 
 There's multiple good options but I decided to go with the easist one just for poc . I also didn't apply much security in my solution for easier access and demo.
